@@ -26,11 +26,30 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['OUTPUT_FOLDER'] = OUTPUT_FOLDER
 app.config['MAX_CONTENT_LENGTH'] = 50 * 1024 * 1024  # 50MB max file size
 
-# Initialize PaddleOCR
-ocr = PaddleOCR(use_angle_cls=True, lang='korean', use_gpu=False)
+# Initialize PaddleOCR with Korean language support
+ocr = PaddleOCR(use_angle_cls=True, lang='ko', use_gpu=False)
 
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
+def cleanup_old_files(directory, max_age_hours=1):
+    """
+    Remove files older than max_age_hours from the specified directory
+    """
+    import time
+    current_time = time.time()
+    max_age_seconds = max_age_hours * 3600
+    
+    for filename in os.listdir(directory):
+        file_path = os.path.join(directory, filename)
+        if os.path.isfile(file_path):
+            file_age = current_time - os.path.getmtime(file_path)
+            if file_age > max_age_seconds:
+                try:
+                    os.remove(file_path)
+                    print(f"Cleaned up old file: {filename}")
+                except Exception as e:
+                    print(f"Failed to remove {filename}: {e}")
 
 def pdf_to_pptx(pdf_path, output_path):
     """
@@ -163,8 +182,13 @@ def upload_file():
             # Convert PDF to PPTX
             pdf_to_pptx(pdf_path, output_path)
             
-            # Clean up uploaded PDF
-            os.remove(pdf_path)
+            # Clean up uploaded PDF and old output files
+            try:
+                os.remove(pdf_path)
+                # Clean up output files older than 1 hour
+                cleanup_old_files(app.config['OUTPUT_FOLDER'], max_age_hours=1)
+            except Exception as e:
+                print(f"Cleanup warning: {e}")
             
             return jsonify({
                 'success': True,

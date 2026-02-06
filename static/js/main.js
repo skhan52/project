@@ -83,27 +83,17 @@ async function convertFile() {
     // Hide convert button and show progress
     convertBtn.style.display = 'none';
     progressSection.style.display = 'block';
-    progressFill.style.width = '0%';
+    progressFill.style.width = '50%';
+    progressText.textContent = '변환 중... 잠시만 기다려주세요';
     
     const formData = new FormData();
     formData.append('file', selectedFile);
     
     try {
-        // Simulate progress
-        let progress = 0;
-        const progressInterval = setInterval(() => {
-            progress += 5;
-            if (progress <= 90) {
-                progressFill.style.width = progress + '%';
-            }
-        }, 300);
-        
         const response = await fetch('/api/upload', {
             method: 'POST',
             body: formData
         });
-        
-        clearInterval(progressInterval);
         
         const data = await response.json();
         
