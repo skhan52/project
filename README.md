@@ -87,6 +87,14 @@ python app.py
 
 서버가 시작되면 `http://localhost:5000`에서 접근할 수 있습니다.
 
+**개발 모드로 실행 (디버깅)**:
+```bash
+export FLASK_DEBUG=1  # Windows: set FLASK_DEBUG=1
+python app.py
+```
+
+**주의**: 프로덕션 환경에서는 절대 디버그 모드를 사용하지 마세요!
+
 ### 2. 웹 인터페이스 사용
 
 1. 웹 브라우저에서 `http://localhost:5000` 접속
