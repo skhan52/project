@@ -14,10 +14,20 @@ OCR 기술을 활용하여 PDF 형식의 이미지 슬라이드를 PowerPoint(PP
 ## 기술 스택
 
 - **Backend**: Flask (Python)
-- **OCR Engine**: PaddleOCR 3.0
+- **OCR Engine**: PaddleOCR 2.9.1 with PaddlePaddle 3.3.0
 - **PDF Processing**: pdf2image
 - **PPTX Generation**: python-pptx
 - **Frontend**: HTML5, CSS3, JavaScript (Vanilla)
+
+## 보안
+
+⚠️ **중요**: 프로덕션 환경에서 사용하기 전에 [SECURITY.md](SECURITY.md) 문서를 반드시 확인하세요.
+
+- ✅ 모든 의존성이 최신 보안 버전으로 업데이트됨
+- ✅ PaddlePaddle 3.3.0 (이전 버전의 보안 취약점 해결)
+- ✅ 디버그 모드 기본적으로 비활성화
+- ✅ 파일 자동 정리 (1시간 후)
+- ⚠️ 프로덕션 사용 시 추가 보안 레이어 필요 (인증, HTTPS, 방화벽 등)
 
 ## 시스템 요구사항
 
