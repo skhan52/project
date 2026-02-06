@@ -62,6 +62,23 @@ pip install -r requirements.txt
 
 ## 사용 방법
 
+### 방법 1: Docker 사용 (권장)
+
+가장 쉬운 방법입니다. Docker가 설치되어 있다면:
+
+```bash
+# 이미지 빌드 및 실행
+docker-compose up -d
+
+# 또는 Docker만 사용
+docker build -t pdf-converter .
+docker run -p 5000:5000 pdf-converter
+```
+
+서버가 시작되면 `http://localhost:5000`에서 접근할 수 있습니다.
+
+### 방법 2: 직접 실행
+
 ### 1. 서버 실행
 
 ```bash
