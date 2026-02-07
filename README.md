@@ -37,6 +37,41 @@ OCR 기술을 활용하여 PDF 형식의 이미지 슬라이드를 PowerPoint(PP
 
 ## 설치 방법
 
+> 🎨 **어린이/초보자용**: 쉬운 설명이 필요하신가요? [**어린이용 설치 가이드**](어린이용_설치가이드.md)를 확인하세요! 
+> 
+> - 🚀 **자동 설치**: `어린이용_설치.sh` (Mac/Linux) 또는 `어린이용_설치.bat` (Windows) 실행
+> - 📖 **그림과 함께 보기**: 단계별 설명과 이모지로 쉽게 이해할 수 있어요!
+
+### 방법 1: 자동 설치 스크립트 사용 (추천)
+
+#### Linux/Mac:
+```bash
+chmod +x 어린이용_설치.sh
+./어린이용_설치.sh
+```
+
+#### Windows:
+```
+어린이용_설치.bat 파일을 더블클릭
+```
+
+### 방법 2: Docker 사용 (권장)
+
+가장 쉬운 방법입니다. Docker가 설치되어 있다면:
+
+```bash
+# 이미지 빌드 및 실행
+docker-compose up -d
+
+# 또는 Docker만 사용
+docker build -t pdf-converter .
+docker run -p 5000:5000 pdf-converter
+```
+
+서버가 시작되면 `http://localhost:5000`에서 접근할 수 있습니다.
+
+### 방법 3: 수동 설치
+
 ### 1. 시스템 의존성 설치
 
 #### Ubuntu/Debian:
