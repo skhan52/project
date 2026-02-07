@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDF to PPTX Converter with OCR</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📄 PDF to PPTX Converter</h1>
+            <p class="subtitle">OCR 기반 PDF 슬라이드를 파워포인트로 변환</p>
+        </header>
+
+        <main>
+            <div class="upload-section">
+                <div class="upload-area" id="uploadArea">
+                    <svg class="upload-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+                    </svg>
+                    <p class="upload-text">PDF 파일을 드래그하거나 클릭하여 업로드하세요</p>
+                    <p class="upload-subtext">최대 파일 크기: 50MB</p>
+                    <input type="file" id="fileInput" accept=".pdf" hidden>
+                    <button class="btn-upload" onclick="document.getElementById('fileInput').click()">
+                        파일 선택
+                    </button>
+                </div>
+
+                <div id="fileInfo" class="file-info" style="display: none;">
+                    <div class="file-details">
+                        <svg class="file-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                        </svg>
+                        <div>
+                            <p class="file-name" id="fileName"></p>
+                            <p class="file-size" id="fileSize"></p>
+                        </div>
+                    </div>
+                    <button class="btn-remove" onclick="removeFile()">✕</button>
+                </div>
+
+                <button id="convertBtn" class="btn-convert" onclick="convertFile()" style="display: none;">
+                    변환 시작
+                </button>
+
+                <div id="progressSection" class="progress-section" style="display: none;">
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+                    <p class="progress-text" id="progressText">변환 중...</p>
+                </div>
+
+                <div id="resultSection" class="result-section" style="display: none;">
+                    <div class="success-message">
+                        <svg class="success-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        <p>변환이 완료되었습니다!</p>
+                    </div>
+                    <button class="btn-download" onclick="downloadFile()">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                        </svg>
+                        PPTX 다운로드
+                    </button>
+                    <button class="btn-new" onclick="resetForm()">
+                        새 파일 변환
+                    </button>
+                </div>
+            </div>
+
+            <div class="features">
+                <div class="feature-card">
+                    <div class="feature-icon">🔍</div>
+                    <h3>OCR 텍스트 인식</h3>
+                    <p>PaddleOCR을 사용하여 정확한 텍스트 추출</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📐</div>
+                    <h3>레이아웃 유지</h3>
+                    <p>원본 텍스트 위치와 크기 그대로 보존</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🖼️</div>
+                    <h3>이미지 보존</h3>
+                    <p>텍스트 외 이미지 요소 완벽 유지</p>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p>Powered by PaddleOCR & Python-PPTX</p>
+        </footer>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  pdf-converter:
+    build: .
+    container_name: pdf-to-pptx-converter
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./uploads:/app/uploads
+      - ./outputs:/app/outputs
+    environment:
+      - FLASK_DEBUG=0
+    restart: unless-stopped
